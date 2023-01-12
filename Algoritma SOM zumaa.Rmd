@@ -118,4 +118,5 @@ add.cluster.boundaries(som.Titanic, peta)
 # Referensi
 
 1. https://medium.com/@16611130/penerapan-self-organizing-map-som-pada-r-menggunakan-data-wines-7c83130fc1a0
-2. https://medium.com/@riameliaa25/self-organizing-map-som-dengan-iris-dataset-menggunakan-r-57b77bc2daa7
+2. Akun Github : https://github.com/zumafikanadila/Algoritma-SOM
+3. https://medium.com/@riameliaa25/self-organizing-map-som-dengan-iris-dataset-menggunakan-r-57b77bc2daa7
