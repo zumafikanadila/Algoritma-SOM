@@ -1,7 +1,7 @@
 ---
-title: "My document"
+title: "Algoritma SOM Dengan R"
 date: "`r Sys.Date()`"
-author: Deden Istiawan-Institut Teknologi Statistika dan Bisnis Muhammadiyah
+author: zumafikanadila-Insitut Teknologi Statistika Dan Bisnis Muhammadiyah Semarang
 output:
   rmdformats::robobook:
     self_contained: true
@@ -22,24 +22,100 @@ text-align: justify}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# R Markdown
+# Algoritma SOM
+Self-Organizing Map (SOM) oleh Teuvo Kohonen pada tahun 1996. SOM merupakan teknik dalam Neural Network yang bertujuan untuk melakukan visualisasi data dengan cara mengurangi dimensi data melalui penggunaan self-organizing neural networks sehingga, manusia dapat mengerti high-dimensional data yang dipetakan dalam bentuk low-dimensional data. Metode pembelajaran yang digunakan SOM adalah tanpa bimbingan dari suatu data input-target atau unsupervised learning.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents [@deCarvalho2012]. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+Pada algoritma SOM, vektor bobot untuk setiap unit cluster berfungsi sebagai contoh dari input pola yang terkait dengan cluster itu. Selama proses self-organizing, cluster satuan yang bobotnya sesuai dengan pola vektor input yang paling dekat (biasanya, kuadrat dari jarak Euclidean minimum) dipilih sebagai pemenang.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Dalam jaringan SOM, neuron target tidak diletakkan dalam sebuah baris seperti layaknya model JST yang lain. Neuron target diletakkan dalam dua dimensi yang bentuk/topologinya dapat diatur. Pada SOM, perubahan bobot tidak hanya dilakukan pada bobot garis yang terhubung ke neuron pemenang saja, tetapi juga pada bobot garis ke neuron-neuron di sekitarnya. Neuron di sekitarnya neuron pemenang ditentukan berdasarkan jarak dari neuron pemenang.
 
-```{r cars}
-summary(cars)
+# Tahapan Algoritma SOM
+1. Aktifkan package Class, MASS, dan Kohonen.
+2. Memanggil data titanic dalam R.
+3. Melakukan standarisasi data.
+4. Melihat dimensi dari data titanic. 
+5. Melihat struktur dari data titanic.
+6. Kemudian membuat kelompok atau clustering dari data titanic.
+7. Selanjutnya melakukan perintah SOM dari data titanic.
+8. Melihat struktur data setelah adanya cara kerja SOM pada data titanic.
+9. Melihat hasil plot dari data.
+10. Melihat objek yang masuk didalam lingkaran.
+11. Melihat letak nomer objek berapa yang masuk dalam lingkaran.
+12. Kemudian melihat plot keseluruhan som.titanic dan letak dari masing-masing unit klasifikasi.
+13. Selanjutnya melihat hasil pengelompokkan dari beberapa objek didalam masing-masing lingkaran.
+14. Melakukan pengelompokkan berdasarkan nilai codes menggunakan cluster hierarki.
+15. Kemudian membuat plot hasil pengelompokkan dan menambahkan garis pembatas untuk melihat lebih jelas batas pada pengelompokkan.
+
+# Eksperimen Algoritma SOM
+## Library 
+```{r}
+library(class)
+library(MASS)
+library(kohonen)
+```
+## Data
+```{r}
+data("Titanic")
+View(Titanic)
+```
+## Standarisasi
+```{r}
+scale(Titanic)
+head(scale(Titanic))
+```
+## Dimensi Data
+```{r}
+dim(Titanic)
+```
+## Struktur Data
+```{r}
+str(Titanic)
+```
+## Kelompok atau Clustering 
+```{r}
+grid <- somgrid(xdim=5 , ydim=5 , topo = "hexagonal")
+```
+```{r}
+som.Titanic<-som(scale(Titanic), grid=somgrid(xdim=5, ydim=5, topo="hexagonal"))
+```
+```{r}
+str(som.Titanic)
+```
+## Hasil Plot
+```{r}
+plot(som.Titanic, type="mapping")
+```
+```{r}
+som.Titanic$grid$pts
+```
+## Letak Nomor Dari Masing-masing Data
+```{r}
+som.Titanic$unit.classif
+```
+## Letak Masing-masing Unit
+```{r warning=FALSE}
+plot(som.Titanic)
+text(som.Titanic$grid$pts, labels = som.Titanic$unit.classif,cex=1.5)
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+## Kode Nilai
+```{r}
+som.Titanic$codes[[1]]
 ```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## Jarak & Hierarki Pengelompokkan
+```{r}
+dist(som.Titanic$codes[[1]])
+hclust(dist(som.Titanic$codes[[1]]))
+```
+## Cluster Boundaris
+```{r warning=FALSE}
+peta <- cutree(hclust(dist(som.Titanic$codes[[1]])),5)
+plot(peta)
+plot(som.Titanic,type="codes",bgcol=rainbow(5)[peta])
+add.cluster.boundaries(som.Titanic, peta)
+```
 
 # Referensi
+
+1. https://medium.com/@16611130/penerapan-self-organizing-map-som-pada-r-menggunakan-data-wines-7c83130fc1a0
+2. https://medium.com/@riameliaa25/self-organizing-map-som-dengan-iris-dataset-menggunakan-r-57b77bc2daa7
