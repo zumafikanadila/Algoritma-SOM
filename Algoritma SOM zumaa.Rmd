@@ -23,11 +23,11 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Algoritma SOM
-Self-Organizing Map (SOM) oleh Teuvo Kohonen pada tahun 1996. SOM merupakan teknik dalam Neural Network yang bertujuan untuk melakukan visualisasi data dengan cara mengurangi dimensi data melalui penggunaan self-organizing neural networks sehingga, manusia dapat mengerti high-dimensional data yang dipetakan dalam bentuk low-dimensional data. Metode pembelajaran yang digunakan SOM adalah tanpa bimbingan dari suatu data input-target atau unsupervised learning.
+Self-Organizing Map (SOM) atau sering disebut topology-preserving map pertama kali diperkenalkan oleh Teuvo Kohonen pada tahun 1996 dengan teknik pelatihan ANN yang menggunakan basis winner takes all, dimana hanya neuron yang menjadi pemenang yang akan diperbaharui bobotnya. SOM merupakan salah satu algoritma clustering yang paling populer dan merupakan salah satu tool  visualisasi yang handal untuk memproyeksikan hubungan kompleks dari ruang input berdimensi tinggi ke dalam sebuah ruang berdimensi rendah.
 
 Pada algoritma SOM, vektor bobot untuk setiap unit cluster berfungsi sebagai contoh dari input pola yang terkait dengan cluster itu. Selama proses self-organizing, cluster satuan yang bobotnya sesuai dengan pola vektor input yang paling dekat (biasanya, kuadrat dari jarak Euclidean minimum) dipilih sebagai pemenang.
 
-Dalam jaringan SOM, neuron target tidak diletakkan dalam sebuah baris seperti layaknya model JST yang lain. Neuron target diletakkan dalam dua dimensi yang bentuk/topologinya dapat diatur. Pada SOM, perubahan bobot tidak hanya dilakukan pada bobot garis yang terhubung ke neuron pemenang saja, tetapi juga pada bobot garis ke neuron-neuron di sekitarnya. Neuron di sekitarnya neuron pemenang ditentukan berdasarkan jarak dari neuron pemenang.
+Algoritma SOM adalah salah satu algoritma unsupervised yang dapat diimplementasikan untuk pengelompokkan data dengan pendekatan algoritma jaringan saraf/neural network.
 
 # Tahapan Algoritma SOM
 1. Aktifkan package Class, MASS, dan Kohonen.
